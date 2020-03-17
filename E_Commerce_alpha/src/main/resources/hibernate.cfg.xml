@@ -32,10 +32,7 @@
       <property name="show_sql">true</property>
       <!-- <property name="hibernate.id.new_generator_mappings">false</property> -->
  
-      <mapping class="com.madhudevs.javaprogproj.hibernateBeans.ProgramBean" />
-      <mapping class="com.madhudevs.javaprogproj.hibernateBeans.ComplexityBean" />
-      <mapping class="com.madhudevs.javaprogproj.hibernateBeans.TypeBean" />
-      <mapping class="com.madhudevs.javaprogproj.hibernateBeans.AdminBean" />
+      <mapping class="com.wtt.eCommerce.products.ProductTableConfig" />
       
 
  
