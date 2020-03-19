@@ -37,6 +37,7 @@ public class ProductDetailsDAO {
 				productList.add(objects[0]+"");
 				productList.add(objects[1]+"");
 				productList.add(objects[2]+"");
+				productList.add(objects[3]+"");
 				
 				productsList.add(productList);
 			}
@@ -69,7 +70,8 @@ public class ProductDetailsDAO {
 			
 			Root<ProductTableConfig> root = cr.from(ProductTableConfig.class);
 			
-			cr = cr.multiselect(root.get("productId"), root.get("productName"), root.get("productPrice"));
+			cr = cr.multiselect(root.get("productId"), root.get("productName"), root.get("productPrice")
+					, root.get("prodImageName"));
 			
 			
 			List<Predicate> predicates = new ArrayList<Predicate>();

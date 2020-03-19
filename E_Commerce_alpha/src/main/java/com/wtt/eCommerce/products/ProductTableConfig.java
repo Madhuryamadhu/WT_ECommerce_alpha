@@ -32,6 +32,9 @@ public class ProductTableConfig {
 	@Column(name="prod_sub_category")
 	private int productSubCategory;
 	
+	@Column(name="prod_image_name")
+	private String prodImageName;
+	
 	@Column(name="prod_price")
 	private double productPrice;
 	
@@ -52,6 +55,15 @@ public class ProductTableConfig {
 	
 	@Column(name="prod_isHidden")
 	private int isHidden;
+
+	
+	public String getProdImageName() {
+		return prodImageName;
+	}
+
+	public void setProdImageName(String prodImageName) {
+		this.prodImageName = prodImageName;
+	}
 
 	public int getProductId() {
 		return productId;
@@ -182,7 +194,13 @@ public class ProductTableConfig {
 		builder.append(productCategory);
 		builder.append(", productSubCategory=");
 		builder.append(productSubCategory);
-		builder.append(", productPrice=");
+		builder.append(", ");
+		if (prodImageName != null) {
+			builder.append("prodImageName=");
+			builder.append(prodImageName);
+			builder.append(", ");
+		}
+		builder.append("productPrice=");
 		builder.append(productPrice);
 		builder.append(", productSoldCount=");
 		builder.append(productSoldCount);

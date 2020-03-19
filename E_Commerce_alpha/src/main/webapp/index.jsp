@@ -14,10 +14,14 @@
     <title>Freshshop - Ecommerce Bootstrap 4 HTML Template</title>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
+    
+    
+    
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery.nicescroll.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery.superslides.min.js"></script>
+    
     
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -35,6 +39,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/custom.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.1/css/bootstrap-slider.min.css">
+    
 </head>
 
 <body>
@@ -324,6 +331,8 @@
     <script src="${pageContext.request.contextPath}/resources/js/form-validator.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/contact-form-script.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js"></script>
+    
 </body>
 
 
