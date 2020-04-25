@@ -16,12 +16,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import com.wtt.eCommerce.common.CommonFunctions;
 import com.wtt.eCommerce.common.HibernateUtil;
 
 public class ProductDetailsDAO {
 
 	private static final Logger logger = LogManager.getLogger();
-
+	private CommonFunctions commons=new CommonFunctions();
 
 	public boolean getProductListForView(ProductDetailsBean bean) {
 		List<LinkedList<String>> productsList=null;
@@ -77,14 +78,30 @@ public class ProductDetailsDAO {
 			List<Predicate> predicates = new ArrayList<Predicate>();
 			predicates.add(cb.equal(root.get("isHidden"),0));
 			
+			
+			if (bean.getProductCategory()>0) {
+				predicates.add(cb.equal(root.get("productCategory"),bean.getProductCategory()));
+			}
+			if (bean.getProductSubCategory()>0) {
+				predicates.add(cb.equal(root.get("productSubCategory"),bean.getProductSubCategory()));
+			}
+			/*if (bean.getProductBrand()>0) {
+				predicates.add(cb.equal(root.get("isHidden"),0));
+			}*/
+			
+			if(CommonFunctions.isValid(bean.getPriceRange())) {
+				logger.info(bean.getPriceRange());
+				
+			}
+			
 			if (predicates.size() > 0) {
 				cr = cr.where(predicates.toArray(new Predicate[] {}));
 			}
 			
 			
 			//for pagination
-			Query<Object[]> q = session.createQuery(cr).setFirstResult(0)
-					.setMaxResults(300);
+			Query<Object[]> q = session.createQuery(cr).setFirstResult(bean.getOffset())
+					.setMaxResults(bean.getLimit());
 			list = q.getResultList();
 			
 			
