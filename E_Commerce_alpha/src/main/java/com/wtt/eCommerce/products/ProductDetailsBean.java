@@ -24,7 +24,6 @@ public class ProductDetailsBean {
 	private int modifyUser;
 	private Date modifyDate;
 	private int isHidden;
-	private String productImageName;
 	private String priceRange;
 	private int productBrand;
 	private String productImageName;
