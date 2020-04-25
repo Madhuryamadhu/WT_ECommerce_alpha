@@ -6,6 +6,9 @@ import java.util.List;
 
 public class ProductDetailsBean {
 	
+	private int offset;
+	private int limit;
+	
 	
 	//Single product fields
 	private int productId;
@@ -22,12 +25,39 @@ public class ProductDetailsBean {
 	private Date modifyDate;
 	private int isHidden;
 	private String productImageName;
+	private String priceRange;
+	private int productBrand;
 	
 	
 	//Other fields
 	private List<LinkedList<String>> productList;
 	
 	
+	
+	public int getOffset() {
+		return offset;
+	}
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
+	public int getLimit() {
+		return limit;
+	}
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+	public int getProductBrand() {
+		return productBrand;
+	}
+	public void setProductBrand(int productBrand) {
+		this.productBrand = productBrand;
+	}
+	public String getPriceRange() {
+		return priceRange;
+	}
+	public void setPriceRange(String priceRange) {
+		this.priceRange = priceRange;
+	}
 	public int getProductId() {
 		return productId;
 	}
