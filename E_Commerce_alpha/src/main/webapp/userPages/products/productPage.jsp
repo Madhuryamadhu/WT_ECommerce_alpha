@@ -26,7 +26,33 @@
 .tooltip-main,.tooltip-min,.tooltip-max{
 	opacity: 100 !important;
 }
-
+#NoProd {
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: #000000;
+    text-transform: uppercase;
+}
+div#quntity {
+   	width: 29%;
+    margin-top: 210px;
+    background: #b0b435;
+    height: 45px;
+}
+.quantityText{
+	height: 47px;
+    margin-left: 5px;
+    font-weight: 700;
+    text-align: center;
+}
+label#qty {
+    font-weight: 700;
+    color: #ffffff;
+}
+input[type=number]::-webkit-inner-spin-button {  
+    width: 14px;
+    height: 40px;
+}
 </style>
 </head>
 
@@ -126,6 +152,10 @@ var sliderTooltip;
 $(document).ready(function() {
 	loadProducts();
 	
+	if($('#cart_list li').length==1){
+		$("#NoProd").show();
+		$(".total").hide();
+	}
 	
 	$("#ex12c").slider({ id: "slider12c",step: 1, min: 0, max: 1000, range: true, value: [10, 500] });
 	//change tooltip format on initial load
@@ -186,6 +216,35 @@ function loadProducts() {
 	});
 
 }
+var totalPrice=0
+function addToCart(productId,productName, productPrice, prodImageName){
+	debugger;
+	var productQuantity=$('#quantityText_'+productId).val();
+	if ($("#productId_"+productId).length==0){
+		var cartHtml='<li id="productId_'+productId+'">'+
+	    '<a href="#" class="photo"><img src="${pageContext.request.contextPath}/resources/images/productImages/'+prodImageName+'.jpg" class="cart-thumb" alt="" /></a>'+
+	    '<h6><a href="#">'+productName+'</a></h6>'+
+	    '<p><span id="qty_'+productId+'">'+productQuantity+'</span> x <span class="price">'+productPrice+'</span></p>'+
+		'</li>';
+		 totalPrice=totalPrice+(productPrice*productQuantity);
+		$('#cart_list li:last-child').before(cartHtml);
+		
+	}else{
+		totalPrice=totalPrice+(productPrice*productQuantity);
+		productQuantity=parseInt($('#qty_'+productId).text())+parseInt($('#quantityText_'+productId).val());
+		$("#qty_"+productId).html(productQuantity);
+	}
+	$('#totalPrice').html(totalPrice);
+	let length = $('#cart_list li').length-1; 
+	$('#noOfProdAddedToCart').html(length);
+	
+	if(length==1){
+		$("#NoProd").hide();
+		$(".total").show();
+	}
+	
+}
+
 
 
 //This is the function to build product html
@@ -206,7 +265,11 @@ function buildProducts(productInfoList){
 											'<li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>'+
 											'<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>'+
 										'</ul>'+
-										'<a class="cart" href="#">Add to Cart</a>'+
+										'<a class="cart" href="#" onclick="addToCart('+productInfoList[i][0]+',\''+productInfoList[i][1]+'\','+productInfoList[i][2]+', \''+productInfoList[i][3]+'\')">Add to Cart</a>'+
+										'<div id="quntity">'+
+											'<label id="qty">Qty:</label>'+
+										    '<input type="number" class="quantityText" id="quantityText_'+productInfoList[i][0]+'" value="1" min="1" max="20"/>'+
+										'</div>'+
 									'</div>'+
 								'</div>'+
 								'<div class="why-text">'+

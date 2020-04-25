@@ -21,6 +21,7 @@ public class ProductDetailsBean {
 	private int modifyUser;
 	private Date modifyDate;
 	private int isHidden;
+	private String productImageName;
 	
 	
 	//Other fields
@@ -113,60 +114,20 @@ public class ProductDetailsBean {
 	public void setProductList(List<LinkedList<String>> productList) {
 		this.productList = productList;
 	}
+	public String getProductImageName() {
+		return productImageName;
+	}
+	public void setProductImageName(String productImageName) {
+		this.productImageName = productImageName;
+	}
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ProductDetailsBean [productId=");
-		builder.append(productId);
-		builder.append(", ");
-		if (productName != null) {
-			builder.append("productName=");
-			builder.append(productName);
-			builder.append(", ");
-		}
-		if (productDescription != null) {
-			builder.append("productDescription=");
-			builder.append(productDescription);
-			builder.append(", ");
-		}
-		if (productQuantity != null) {
-			builder.append("productQuantity=");
-			builder.append(productQuantity);
-			builder.append(", ");
-		}
-		builder.append("productCategory=");
-		builder.append(productCategory);
-		builder.append(", productSubCategory=");
-		builder.append(productSubCategory);
-		builder.append(", productPrice=");
-		builder.append(productPrice);
-		builder.append(", productSoldCount=");
-		builder.append(productSoldCount);
-		builder.append(", createUser=");
-		builder.append(createUser);
-		builder.append(", ");
-		if (createDate != null) {
-			builder.append("createDate=");
-			builder.append(createDate);
-			builder.append(", ");
-		}
-		builder.append("modifyUser=");
-		builder.append(modifyUser);
-		builder.append(", ");
-		if (modifyDate != null) {
-			builder.append("modifyDate=");
-			builder.append(modifyDate);
-			builder.append(", ");
-		}
-		builder.append("isHidden=");
-		builder.append(isHidden);
-		builder.append(", ");
-		if (productList != null) {
-			builder.append("productList=");
-			builder.append(productList);
-		}
-		builder.append("]");
-		return builder.toString();
+		return "ProductDetailsBean [productId=" + productId + ", productName=" + productName + ", productDescription="
+				+ productDescription + ", productQuantity=" + productQuantity + ", productCategory=" + productCategory
+				+ ", productSubCategory=" + productSubCategory + ", productPrice=" + productPrice
+				+ ", productSoldCount=" + productSoldCount + ", createUser=" + createUser + ", createDate=" + createDate
+				+ ", modifyUser=" + modifyUser + ", modifyDate=" + modifyDate + ", isHidden=" + isHidden
+				+ ", productImageName=" + productImageName + ", productList=" + productList + "]";
 	}
 	
 	

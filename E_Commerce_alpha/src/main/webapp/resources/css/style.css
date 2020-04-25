@@ -987,13 +987,20 @@ ${pageContext.request.contextPath}/*--------------------------------------------
      display: block;
 }
  .mask-icon a.cart{
-     background: #b0b435;
+    /*  background: #b0b435;
      position: absolute;
      bottom: 0;
      left: 0px;
      padding: 10px 20px;
      font-weight: 700;
-     color: #ffffff;
+     color: #ffffff; */
+     background: #b0b435;
+    position: absolute;
+    bottom: 0;
+    margin-left: 106px;
+    padding: 10px 20px;
+    font-weight: 700;
+    color: #ffffff;
 }
  .mask-icon a.cart:hover{
      background: #000000;
