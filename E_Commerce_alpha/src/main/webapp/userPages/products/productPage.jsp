@@ -92,13 +92,13 @@ input[type=number]::-webkit-inner-spin-button {
                     <div class="modal-content">
                         <div class="modal-header">
                         	<h4 style="font-size: 22px; font-weight: bold;">Filter Products</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <button type="button" id="filterClose" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body">
                             <form role="form" method="post" id="reused_form">
                                 <div class="form-group">
                                     <label for="name"> Category:</label>
-                                   <select class="form-control">
+                                   <select class="form-control" id="filterCategory">
                                         <option value="">Select</option>
                                         <option value="1">Seasonal Fruits</option>
                                         <option value="2">Dry Fruits</option>
@@ -108,7 +108,7 @@ input[type=number]::-webkit-inner-spin-button {
                                 </div>
                                  <div class="form-group">
                                     <label for="name">Sub Category:</label>
-                                   <select class="form-control">
+                                   <select class="form-control" id="filterSubCategory">
                                         <option value="">Select</option>
                                         <option value="1">Seasonal Fruits</option>
                                         <option value="2">Dry Fruits</option>
@@ -118,7 +118,7 @@ input[type=number]::-webkit-inner-spin-button {
                                 </div>
                                  <div class="form-group">
                                     <label for="name">Brand:</label>
-                                   <select class="form-control">
+                                   <select class="form-control" id="filterBrand">
                                         <option value="">Select</option>
                                         <option value="1">Seasonal Fruits</option>
                                         <option value="2">Dry Fruits</option>
@@ -129,10 +129,10 @@ input[type=number]::-webkit-inner-spin-button {
                                 
                                 <div class="form-group">
                             	   <label for="name">Price Range:</label><br/><br/>
-	                               <input id="ex12c" type="text"/><br/>
+	                               <input id="filterPriceRange" type="text"/><br/>
 						        </div>
                                 <div class="button-group filter-button-group">
-                           		      <button type="submit" class="btn btn-lg  btn-block" id="btnContactUs">Submit! &rarr;</button>
+                           		      <button type="button" class="btn btn-lg  btn-block" id="btnContactUs" onclick="loadFilterMap()">Submit! &rarr;</button>
                                 </div>
                                
                             </form>
@@ -157,13 +157,13 @@ $(document).ready(function() {
 		$(".total").hide();
 	}
 	
-	$("#ex12c").slider({ id: "slider12c",step: 1, min: 0, max: 1000, range: true, value: [10, 500] });
+	$("#filterPriceRange").slider({ id: "slider12c",step: 1, min: 0, max: 1000, range: true, value: [10, 500] });
 	//change tooltip format on initial load
 	_changeTooltipFormat();
 	
-	//This is to add formatting for price range tooltip
-	 $("#ex12c").on("slide slideStop", function(slideEvt) {
-		  $('#slider12c').attr('value',$("#ex12c").data('slider').getValue());
+	//This is to add formatting for price range tooltip on slide 
+	 $("#filterPriceRange").on("slide slideStop", function(slideEvt) {
+		  $('#slider12c').attr('value',$("#filterPriceRange").data('slider').getValue());
 		   //change tooltip value format 
 		   _changeTooltipFormat();  
 	}); 
@@ -244,7 +244,10 @@ function addToCart(productId,productName, productPrice, prodImageName){
 	}
 	
 }
+<<<<<<< Upstream, based on origin/master
 
+=======
+>>>>>>> e738eb7 filter of first page correccted
 
 
 //This is the function to build product html
@@ -283,5 +286,100 @@ function buildProducts(productInfoList){
 	   productHtml +='</div>';
 	   $('#productList').append(productHtml);
 }
+
+
+//This is the function to load get the product information
+function loadProducts() {
+	var dataArray = {};
+	
+	dataArray["offset"]= "2";
+	dataArray["limit"]= "2";
+	
+	for (var key in filterMap) {
+	    if (filterMap.hasOwnProperty(key)) {           
+	        if(key=='category'){
+	        	dataArray["productCategory"]= filterMap[key];
+	        }else  if(key=='subCategory'){
+	        	dataArray["productSubCategory"]= filterMap[key];
+	        }else  if(key=='brand'){
+	        	dataArray["productBrand"]= filterMap[key];
+	        }else  if(key=='priceRange'){
+	        	dataArray["priceRange"]= filterMap[key];
+	        }
+	    }
+	}
+	
+	//Clearing filter map
+	filterMap={};
+	
+	$.ajax({
+		type : "POST",
+		contentType : "application/json",
+		url : "loadProducts",
+		data : JSON.stringify(dataArray),
+		timeout : 100000,
+		success : function(data) {
+				 buildProducts(data.productList);
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		},
+		done : function(e) {
+			console.log("getTypeDetails DONE");
+		}
+	});
+
+}
+
+
+function loadFilterMap(){
+	if(isValid($("#filterCategory").val())){
+		filterMap["category"]=$("#filterCategory").val();
+	}
+	if(isValid($("#filterSubCategory").val())){
+		filterMap["subCategory"]=$("#filterSubCategory").val();
+	}
+	if(isValid($("#filterBrand").val())){
+		filterMap["brand"]=$("#filterBrand").val();
+	}
+	if(isValid($("#filterPriceRange").val())){
+		filterMap["priceRange"]=$("#filterPriceRange").val();
+	}
+	
+	loadProducts();
+	
+	$('#filterClose').click();
+}
+
+function isValid(value){
+	if(value==null||value==''||value=='undefined'||value=='NaN'||value=='null')
+		return false;
+	
+	return true;
+}
+
+function loadDescriptionPage(pagePath,parameters,Id){
+	$.ajax({
+			type : "POST",
+			url : "goToPage",
+		    data : {
+			"pagePath" : pagePath,
+			"parameters" : parameters
+		},
+			success : function(data) {
+				 $('#'+Id).empty();
+			     $('#'+Id).html(data);
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+			},
+			done : function(e) {
+				console.log("getTypeDetails DONE");
+			}
+		});
+}
+
+
+
 </script>
 </html>

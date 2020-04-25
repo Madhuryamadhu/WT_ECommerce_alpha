@@ -27,6 +27,7 @@ public class ProductDetailsBean {
 	private String productImageName;
 	private String priceRange;
 	private int productBrand;
+	private String productImageName;
 	
 	
 	//Other fields

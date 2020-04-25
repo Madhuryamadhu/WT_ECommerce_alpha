@@ -9,7 +9,9 @@
         </File>
     </Appenders>
     <Loggers>
-        <Root level="debug">
+    	<Logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="trace" />
+    		
+        <Root level="info">
             <AppenderRef ref="Console" />
             <AppenderRef ref="MyFile"/>
         </Root>

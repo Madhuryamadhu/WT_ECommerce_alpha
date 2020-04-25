@@ -200,7 +200,7 @@
 
 
    <!-- Product Details -->
-   <div id="productContainer"></div>
+   <div id="contentDivMain"></div>
 
 
 
@@ -323,6 +323,7 @@
 
 
 <script type="text/javascript">
+var filterMap={};
 
 $(document).ready(function() {
 	//alert("Lets Start Man!!");
@@ -341,7 +342,7 @@ function loadPage() {
 		data : JSON.stringify(dataArray),
 		timeout : 100000,
 		success : function(data) {
-				 $('#productContainer').html(data);
+				 $('#contentDivMain').html(data);
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);
