@@ -45,6 +45,9 @@ public class ProductDetailsController {
 			}else {
 				logger.info("failed to get product list!!");
 			}
+			
+			
+			logger.info("FOR TESTING");
 		} catch (Exception e) {
 			logger.error("Exception occured",e);
 		}
