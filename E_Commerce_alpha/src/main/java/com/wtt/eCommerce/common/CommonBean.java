@@ -1,13 +1,17 @@
 package com.wtt.eCommerce.common;
 
+import java.util.HashMap;
+
 public class CommonBean {
 
-	private String parameters;
+	private HashMap<String, Object> parameters;
 	private String pagePath;
-	public String getParameters() {
+
+	
+	public HashMap<String, Object> getParameters() {
 		return parameters;
 	}
-	public void setParameters(String parameters) {
+	public void setParameters(HashMap<String, Object> parameters) {
 		this.parameters = parameters;
 	}
 	public String getPagePath() {
