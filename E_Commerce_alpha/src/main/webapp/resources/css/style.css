@@ -2059,7 +2059,7 @@ ${pageContext.request.contextPath}/*--------------------------------------------
      font-size: 16px;
 }
  .quantity-box input{
-     width: 60px;
+     width: 60px !important;
      border: 2px solid #000000;
      text-align: center;
 }
@@ -2605,10 +2605,78 @@ ${pageContext.request.contextPath}/*--------------------------------------------
 	border: none;
 }
 
+.hide{
+	display: none;
+}
 
 
 
 
+
+
+
+#slider12a .slider-track-high, #slider12c .slider-track-high {
+	background: #b0aeae !important;
+}
+
+#slider12b .slider-track-low, #slider12c .slider-track-low {
+	background: #b0aeae !important;
+}
+
+#slider12c .slider-selection {
+	background: #b0b435 !important;
+}
+
+.slider-handle{
+  background-image: linear-gradient(to bottom,#000000 0,#70726e 100%);
+}
+.tooltip-main,.tooltip-min,.tooltip-max{
+	opacity: 100 !important;
+}
+#NoProd {
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: #000000;
+    text-transform: uppercase;
+}
+div#quntity {
+   	width: 29%;
+    margin-top: 210px;
+    background: #b0b435;
+    height: 45px;
+}
+.quantityText{
+	height: 47px;
+    margin-left: 5px;
+    font-weight: 700;
+    text-align: center;
+}
+label#qty {
+    font-weight: 700;
+    color: #ffffff;
+}
+input[type=number]::-webkit-inner-spin-button {  
+    width: 14px;
+    height: 40px;
+}
+
+
+.showMoreBtn {
+  background-color: #b0b435;
+  border: none;
+  color: white;
+  padding: 4px 30px;
+  cursor: pointer;
+  font-size: 17px;
+  width: 100%;
+  height: 37px;
+}
+
+/* Darker background on mouse-over */
+.showMoreBtn:hover {
+  background-color: #111111;
+}
 
 
 

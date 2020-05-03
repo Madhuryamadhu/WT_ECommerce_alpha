@@ -164,12 +164,12 @@
             </div>
             <!-- Start Side Menu -->
             <div class="side">
-                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+                <a href="#" class="close-side" id="closeCart"><i class="fa fa-times"></i></a>
                 <li class="cart-box">
                     <ul class="cart-list" id="cart_list">
                         <h1 id="NoProd">No Products Available</h1>
                         <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                            <a href="#" class="btn btn-default hvr-hover btn-cart" onclick="loadCartDetailsPage()">VIEW CART</a>
                             <span class="float-right"><strong>Total</strong>: <span id="totalPrice"></span></span>
                         </li>
                     </ul>
@@ -318,7 +318,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/contact-form-script.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/custom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js"></script>
-    
+    <jsp:include page="/common/commonScript.jsp"></jsp:include>
 </body>
 
 
@@ -334,7 +334,7 @@ $(document).ready(function() {
 function loadPage() {
 	
 	
-	var dataArray = {}
+	var dataArray = {};
 	$.ajax({
 		type : "POST",
 		contentType : "application/json",
@@ -351,8 +351,8 @@ function loadPage() {
 			console.log("getTypeDetails DONE");
 		}
 	});
-
 }
+
 </script>
 
 </html>

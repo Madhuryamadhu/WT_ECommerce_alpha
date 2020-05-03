@@ -5,7 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -76,7 +78,7 @@ public class ProductDetailsDAO {
 			
 			
 			List<Predicate> predicates = new ArrayList<Predicate>();
-			predicates.add(cb.equal(root.get("isHidden"),0));
+			//predicates.add(cb.equal(root.get("isHidden"),0));
 			
 			
 			if (bean.getProductCategory()>0) {
@@ -85,9 +87,13 @@ public class ProductDetailsDAO {
 			if (bean.getProductSubCategory()>0) {
 				predicates.add(cb.equal(root.get("productSubCategory"),bean.getProductSubCategory()));
 			}
-			/*if (bean.getProductBrand()>0) {
-				predicates.add(cb.equal(root.get("isHidden"),0));
-			}*/
+			if (bean.getProductIdList()!=null&&bean.getProductIdList().size()>0) {
+				In<Integer> inClause = cb.in(root.get("productId"));
+				for (String title : bean.getProductIdList()) {
+				    inClause.value(Integer.parseInt(title));
+				}
+				cr = cr.where(inClause);
+			}
 			
 			if(CommonFunctions.isValid(bean.getPriceRange())) {
 				logger.info(bean.getPriceRange());

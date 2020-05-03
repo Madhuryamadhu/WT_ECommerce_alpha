@@ -32,8 +32,16 @@ public class ProductDetailsBean {
 	//Other fields
 	private List<LinkedList<String>> productList;
 	
+	private List<String> productIdList;
 	
 	
+	
+	public List<String> getProductIdList() {
+		return productIdList;
+	}
+	public void setProductIdList(List<String> productIdList) {
+		this.productIdList = productIdList;
+	}
 	public int getOffset() {
 		return offset;
 	}
@@ -152,12 +160,80 @@ public class ProductDetailsBean {
 	}
 	@Override
 	public String toString() {
-		return "ProductDetailsBean [productId=" + productId + ", productName=" + productName + ", productDescription="
-				+ productDescription + ", productQuantity=" + productQuantity + ", productCategory=" + productCategory
-				+ ", productSubCategory=" + productSubCategory + ", productPrice=" + productPrice
-				+ ", productSoldCount=" + productSoldCount + ", createUser=" + createUser + ", createDate=" + createDate
-				+ ", modifyUser=" + modifyUser + ", modifyDate=" + modifyDate + ", isHidden=" + isHidden
-				+ ", productImageName=" + productImageName + ", productList=" + productList + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("ProductDetailsBean [offset=");
+		builder.append(offset);
+		builder.append(", limit=");
+		builder.append(limit);
+		builder.append(", productId=");
+		builder.append(productId);
+		builder.append(", ");
+		if (productName != null) {
+			builder.append("productName=");
+			builder.append(productName);
+			builder.append(", ");
+		}
+		if (productDescription != null) {
+			builder.append("productDescription=");
+			builder.append(productDescription);
+			builder.append(", ");
+		}
+		if (productQuantity != null) {
+			builder.append("productQuantity=");
+			builder.append(productQuantity);
+			builder.append(", ");
+		}
+		builder.append("productCategory=");
+		builder.append(productCategory);
+		builder.append(", productSubCategory=");
+		builder.append(productSubCategory);
+		builder.append(", productPrice=");
+		builder.append(productPrice);
+		builder.append(", productSoldCount=");
+		builder.append(productSoldCount);
+		builder.append(", createUser=");
+		builder.append(createUser);
+		builder.append(", ");
+		if (createDate != null) {
+			builder.append("createDate=");
+			builder.append(createDate);
+			builder.append(", ");
+		}
+		builder.append("modifyUser=");
+		builder.append(modifyUser);
+		builder.append(", ");
+		if (modifyDate != null) {
+			builder.append("modifyDate=");
+			builder.append(modifyDate);
+			builder.append(", ");
+		}
+		builder.append("isHidden=");
+		builder.append(isHidden);
+		builder.append(", ");
+		if (priceRange != null) {
+			builder.append("priceRange=");
+			builder.append(priceRange);
+			builder.append(", ");
+		}
+		builder.append("productBrand=");
+		builder.append(productBrand);
+		builder.append(", ");
+		if (productImageName != null) {
+			builder.append("productImageName=");
+			builder.append(productImageName);
+			builder.append(", ");
+		}
+		if (productList != null) {
+			builder.append("productList=");
+			builder.append(productList);
+			builder.append(", ");
+		}
+		if (productIdList != null) {
+			builder.append("productIdList=");
+			builder.append(productIdList);
+		}
+		builder.append("]");
+		return builder.toString();
 	}
 	
 	

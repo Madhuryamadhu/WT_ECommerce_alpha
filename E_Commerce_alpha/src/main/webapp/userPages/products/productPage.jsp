@@ -5,55 +5,6 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-
-<style type="text/css">
-
-#slider12a .slider-track-high, #slider12c .slider-track-high {
-	background: #b0aeae !important;
-}
-
-#slider12b .slider-track-low, #slider12c .slider-track-low {
-	background: #b0aeae !important;
-}
-
-#slider12c .slider-selection {
-	background: #b0b435 !important;
-}
-
-.slider-handle{
-  background-image: linear-gradient(to bottom,#000000 0,#70726e 100%);
-}
-.tooltip-main,.tooltip-min,.tooltip-max{
-	opacity: 100 !important;
-}
-#NoProd {
-    text-align: center;
-    font-weight: 700;
-    font-size: 16px;
-    color: #000000;
-    text-transform: uppercase;
-}
-div#quntity {
-   	width: 29%;
-    margin-top: 210px;
-    background: #b0b435;
-    height: 45px;
-}
-.quantityText{
-	height: 47px;
-    margin-left: 5px;
-    font-weight: 700;
-    text-align: center;
-}
-label#qty {
-    font-weight: 700;
-    color: #ffffff;
-}
-input[type=number]::-webkit-inner-spin-button {  
-    width: 14px;
-    height: 40px;
-}
-</style>
 </head>
 
 <body>
@@ -81,6 +32,8 @@ input[type=number]::-webkit-inner-spin-button {
             <!-- product details div -->
             <div id="productList"></div>
             
+            
+           
          </div>
 
             
@@ -149,7 +102,16 @@ input[type=number]::-webkit-inner-spin-button {
 <script type="text/javascript">
 
 var sliderTooltip;
+var productPageLimit;
+var productPageOffset;
+var pageDraw;
+var selectedProduct= new Object();
+
 $(document).ready(function() {
+	productPageLimit="8";
+	productPageOffset="0";
+	pageDraw="1";
+	
 	loadProducts();
 	
 	if($('#cart_list li').length==1){
@@ -192,33 +154,8 @@ function _changeTooltipFormat(){
 	}
 }
 
-
-
-
-//This is the function to load get the product information
-function loadProducts() {
-	var dataArray = {};
-	$.ajax({
-		type : "POST",
-		contentType : "application/json",
-		url : "loadProducts",
-		data : JSON.stringify(dataArray),
-		timeout : 100000,
-		success : function(data) {
-				 buildProducts(data.productList);
-		},
-		error : function(e) {
-			console.log("ERROR: ", e);
-		},
-		done : function(e) {
-			console.log("getTypeDetails DONE");
-		}
-	});
-
-}
 var totalPrice=0
 function addToCart(productId,productName, productPrice, prodImageName){
-	debugger;
 	var productQuantity=$('#quantityText_'+productId).val();
 	if ($("#productId_"+productId).length==0){
 		var cartHtml='<li id="productId_'+productId+'">'+
@@ -228,12 +165,14 @@ function addToCart(productId,productName, productPrice, prodImageName){
 		'</li>';
 		 totalPrice=totalPrice+(productPrice*productQuantity);
 		$('#cart_list li:last-child').before(cartHtml);
-		
+		selectedProduct[productId+""]=productQuantity+"";
 	}else{
 		totalPrice=totalPrice+(productPrice*productQuantity);
 		productQuantity=parseInt($('#qty_'+productId).text())+parseInt($('#quantityText_'+productId).val());
 		$("#qty_"+productId).html(productQuantity);
+		selectedProduct[productId+""]=productQuantity+"";
 	}
+	
 	$('#totalPrice').html(totalPrice);
 	let length = $('#cart_list li').length-1; 
 	$('#noOfProdAddedToCart').html(length);
@@ -244,10 +183,7 @@ function addToCart(productId,productName, productPrice, prodImageName){
 	}
 	
 }
-<<<<<<< Upstream, based on origin/master
 
-=======
->>>>>>> e738eb7 filter of first page correccted
 
 
 //This is the function to build product html
@@ -282,8 +218,8 @@ function buildProducts(productInfoList){
 							'</div>'+
 						'</div>';
 		}
-	
-	   productHtml +='</div>';
+	    productHtml +=' <div class="col-lg-12 col-md-12" id="showMoreButton_'+pageDraw+'"><button class="showMoreBtn" onclick="showMoreProduct('+pageDraw+')"><i class="fa fa-chevron-circle-down"></i> Show More</button></div>';
+	    productHtml +='</div>';
 	   $('#productList').append(productHtml);
 }
 
@@ -292,8 +228,8 @@ function buildProducts(productInfoList){
 function loadProducts() {
 	var dataArray = {};
 	
-	dataArray["offset"]= "2";
-	dataArray["limit"]= "2";
+	dataArray["offset"]= productPageOffset;
+	dataArray["limit"]= productPageLimit;
 	
 	for (var key in filterMap) {
 	    if (filterMap.hasOwnProperty(key)) {           
@@ -351,35 +287,29 @@ function loadFilterMap(){
 	$('#filterClose').click();
 }
 
-function isValid(value){
-	if(value==null||value==''||value=='undefined'||value=='NaN'||value=='null')
-		return false;
+function showMoreProduct(draw){
 	
-	return true;
+	$('#showMoreButton_'+draw).addClass('hide');
+	
+	productPageLimit="8";
+	productPageOffset=((parseInt(productPageLimit)*parseInt(draw))-1)+"";
+	
+	loadProducts();
+	
+	pageDraw=(parseInt(draw)+1)+"";
 }
 
-function loadDescriptionPage(pagePath,parameters,Id){
-	$.ajax({
-			type : "POST",
-			url : "goToPage",
-		    data : {
-			"pagePath" : pagePath,
-			"parameters" : parameters
-		},
-			success : function(data) {
-				 $('#'+Id).empty();
-			     $('#'+Id).html(data);
-			},
-			error : function(e) {
-				console.log("ERROR: ", e);
-			},
-			done : function(e) {
-				console.log("getTypeDetails DONE");
-			}
-		});
+function loadCartDetailsPage(){
+	var parameters = new Object();
+	parameters["cartQtyMap"]=selectedProduct;
+	
+	var pagePath="/userPages/cartDetails/cartDetails.jsp";
+	var appendId="contentDivMain";
+	
+	loadNewPage(pagePath,parameters,appendId);
+	
+	$('#closeCart').click();
 }
-
-
 
 </script>
 </html>
