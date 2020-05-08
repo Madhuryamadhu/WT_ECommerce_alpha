@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/custom.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.1/css/bootstrap-slider.min.css">
-    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
 </head>
 
 <body>
@@ -318,6 +318,20 @@
     <script src="${pageContext.request.contextPath}/resources/js/contact-form-script.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/custom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+    <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+     -->
+
+
+
+
+    
     <jsp:include page="/common/commonScript.jsp"></jsp:include>
 </body>
 
