@@ -98,7 +98,7 @@
                         </div>
                         <hr> </div>
                 </div>
-                <div class="col-12 d-flex shopping-box"><a href="checkout.html" class="ml-auto btn hvr-hover">Checkout</a> </div>
+                <div class="col-12 d-flex shopping-box"><a href="#" onclick="loadCheckOutPage()" class="ml-auto btn hvr-hover">Checkout</a> </div>
             </div>
 
         </div>
@@ -197,7 +197,7 @@ function calculateCartDetails(prodId,prodQty){
 	var prodTotalAmount=(parseFloat(productAmount))*(parseInt(prodQtyTemp));
 	$('#quantity_totalAmount_'+prodId).text(prodTotalAmount);
 	$('#quantity_total_'+prodId).val(prodQtyTemp);
-	
+	selectedProduct[prodId+""]=$('#quantity_total_'+prodId).val();
 	calculateCartSummary();
 }
 
@@ -222,5 +222,19 @@ function calculateCartSummary(){
 	$('#cartSummary_totalShippingCost').text(totalShippingCost);
 	$('#cartSummary_totalAmount').text(grandTotal);
 }
+
+function loadCheckOutPage(){
+	var parameters = new Object();
+	parameters["cartQtyMap"]=selectedProduct;
+	
+	var pagePath="/userPages/checkout/checkout.jsp";
+	var appendId="contentDivMain";
+	
+	loadNewPage(pagePath,parameters,appendId);
+	
+	$('#closeCart').click();
+}
+
+
 </script>
 </html>

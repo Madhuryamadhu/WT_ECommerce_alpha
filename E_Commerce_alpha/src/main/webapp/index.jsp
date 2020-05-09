@@ -18,7 +18,7 @@
     
     
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <%-- <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script> --%>
     <script src="${pageContext.request.contextPath}/resources/js/jquery.nicescroll.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery.superslides.min.js"></script>
     
@@ -328,6 +328,7 @@
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
      -->
 
+ 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
 
